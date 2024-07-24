@@ -11,26 +11,29 @@ const Content = () => {
         const names = ['Mohsin', 'Hassan', 'Mirsab', 'Mahrosh'];
         const int = Math.floor(Math.random() * 4);
         return names[int];
-      };
+      }
     const handleClick = (e) => {
         console.log(e.target.innerText);
     }
-    const handleCheckbox = (name) => {
-        console.log(name + ' clicked'   );
+    const handleCheckbox = (id) => {
+        const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
+        setItems(listItems);
+        localStorage.setItem('shoppingList', JSON.stringify(listItems));
+        
     }
 
 
 return (
     <main className='content'>
-            <ul>
-                    {items.map((item) => (
-                                    <li className='item' key={item.id}>
-                                            <input type='checkbox' onChange={() => handleCheckbox()} checked={item.checked} />
-                                            <label>{item.name}</label>
-                                            <FaTrashAlt role="button" tabIndex="0" />
-                                    </li>
-                    ))}
-            </ul>
+        <ul>
+            {items.map((item) => (
+                <li className='item' key={item.id}>
+                        <input type='checkbox' onChange={() => handleCheckbox(item.id)} checked={item.checked} />
+                        <label style={(item.checked) ? {TextDecoder: 'line-through'} : null }>{item.name}</label>
+                        <FaTrashAlt role="button" tabIndex="0" />
+                </li>
+            ))}
+        </ul>
             
     </main>
 )
