@@ -1,0 +1,60 @@
+.header {
+    background-color: #343a40;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    padding: 10px;
+    background-color: #4297ec;
+     color : '#fff';
+
+}
+.content  {
+    min-height: 50vh;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+}
+.content button {
+    height: 50px;
+    background-color: #4297ec;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 20px 20px 10px 10px;
+    border-top: 1px solid #e9ecef;
+}
+/* Assuming you have a CSS file linked in your HTML */
+
+.content {
+    padding: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  label {
+    flex-grow: 1;
+  }
+  
+  .FaTrashAlt {
+    /* Add your styles for the trash icon here */
+  }
