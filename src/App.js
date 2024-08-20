@@ -3,6 +3,7 @@
 import Header from './Header';
 import Content from './Content';
 import AddItem from './AddItem';
+import SearchItem from './SearchItem';
 import Footer from './Footer';
 import { useState } from 'react';
 
@@ -17,6 +18,7 @@ function App() {
   
   const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppingList') || []));
   const [newItem, setNewItem] = useState('');
+  const [search, searchItem] = useState('');
 
   const handleCheckbox = (id) => {
     const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
@@ -49,7 +51,8 @@ function App() {
     <div className="App">
       <Header title="React Grocery List"/>
       <AddItem newItem={newItem} setItem={setNewItem} handleSubmit={handleSubmit} />
-      <Content items={items} handleCheckbox={handleCheckbox} handleDelete={handleDelete} />
+      <SearchItem search={search} searchItem={searchItem} handleSubmit={handleSubmit} />
+      <Content items={items.filter(item => ((item.name).toLowerCase()).includes(search.toLowerCase()))} handleCheckbox={handleCheckbox} handleDelete={handleDelete} />
       <Footer length={items.length}  />
 
     </div>

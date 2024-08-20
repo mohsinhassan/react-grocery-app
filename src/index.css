@@ -92,3 +92,57 @@ label {
   outline: none;
 }
 
+.searchForm {
+  margin-bottom: 20px;
+      
+}
+
+.SearchForm {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.SearchForm label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.SearchForm input {
+  flex-grow: 1;
+  height: 40px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.SearchForm input:focus {
+  outline: none;
+  border-color: #4297ec;
+}
+
+.SearchForm input::placeholder {
+  color: #999;
+}
+
+.SearchForm input[type="submit"] {
+  height: 40px;
+  background-color: #4297ec;
+  color: white;
+  padding: 0 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.SearchForm input[type="submit"]:hover {
+  background-color: #1b6ec2;
+}
+
+.SearchForm input[type="submit"]:active {
+  background-color: #155b99;
+}
+
+.SearchForm input[type="submit"]:focus {
+  outline: none;
+}
