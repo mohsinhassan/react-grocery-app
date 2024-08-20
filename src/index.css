@@ -33,28 +33,62 @@ footer {
 /* Assuming you have a CSS file linked in your HTML */
 
 .content {
-    padding: 20px;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  input[type="checkbox"] {
-    margin-right: 10px;
-  }
-  
-  label {
-    flex-grow: 1;
-  }
-  
-  .FaTrashAlt {
-    /* Add your styles for the trash icon here */
-  }
+  padding: 20px;
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+label {
+  flex-grow: 1;
+}
+
+.FaTrashAlt {
+  /* Add your styles for the trash icon here */
+}
+
+.addForm {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.addForm input {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.addForm button {
+  height: 50px;
+  background-color: #4297ec;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.addForm button:hover {
+  background-color: #1b6ec2;
+}
+
+.addForm button:active {
+  background-color: #155b99;
+}
+
+.addForm button:focus {
+  outline: none;
+}
+
