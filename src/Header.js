@@ -5,7 +5,5 @@ const Header = ({title}) => {
   )
 }
 
-Header.defaultProps = {
-  title: 'Default Grocery List'
-}
+
 export default Header

@@ -5,7 +5,7 @@ import Content from './Content';
 import AddItem from './AddItem';
 import SearchItem from './SearchItem';
 import Footer from './Footer';
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 
 
 /* const handleNameChange = () => {
@@ -20,21 +20,20 @@ function App() {
   const [newItem, setNewItem] = useState('');
   const [search, searchItem] = useState('');
 
-  const handleCheckbox = (id) => {
-    const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
-    addItemToLocalStorage(listItems);
-    
-      
-  }
 
-  const addItemToLocalStorage = (listItems) => {
+  useEffect(()=> {
+    console.log('useEffect', items);
+    localStorage.setItem('shoppingList', JSON.stringify(items));
+  }, [items])
+  const handleCheckbox = (id) => {
+    console.log('handleCheckbox', items);
+    const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
     setItems(listItems);
-    localStorage.setItem('shoppingList', JSON.stringify(listItems));
   }
 
   const handleDelete = (id) => {
     const listItems = items.filter((item) => item.id !== id );
-    addItemToLocalStorage(listItems);
+    setItems(listItems);
   }
 
   const handleSubmit = (event) => {
@@ -43,13 +42,13 @@ function App() {
       const name = newItem;
       const item = { id, name };
       const listItems = [...items, item];
-      addItemToLocalStorage(listItems);
+      setItems(listItems);
       setNewItem(''); 
   }
 
   return (
     <div className="App">
-      <Header title="React Grocery List"/>
+      <Header title="Grocery List"/>
       <AddItem newItem={newItem} setItem={setNewItem} handleSubmit={handleSubmit} />
       <SearchItem search={search} searchItem={searchItem} handleSubmit={handleSubmit} />
       <Content items={items.filter(item => ((item.name).toLowerCase()).includes(search.toLowerCase()))} handleCheckbox={handleCheckbox} handleDelete={handleDelete} />
@@ -58,5 +57,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
