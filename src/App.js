@@ -19,12 +19,27 @@ function App() {
   const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppingList') || []));
   const [newItem, setNewItem] = useState('');
   const [search, searchItem] = useState('');
+  const [fetchError, setFetchError] = useState('');
+  const [isLoading, setIsLoading] = useState('true');
+  const ApiUrl = 'http://localhost:3500/items';
 
+  useEffect(() => {
 
-  useEffect(()=> {
-    console.log('useEffect', items);
-    localStorage.setItem('shoppingList', JSON.stringify(items));
-  }, [items])
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(ApiUrl);
+        if (!response.ok) throw Error('Did not receive expected data');
+        const listItems = await response.json();
+        setItems(listItems);
+        setFetchError(null);
+      } catch (err) {
+        setFetchError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    setTimeout(() => fetchItems(), 2000);
+  }, [])
   const handleCheckbox = (id) => {
     console.log('handleCheckbox', items);
     const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
@@ -51,7 +66,16 @@ function App() {
       <Header title="Grocery List"/>
       <AddItem newItem={newItem} setItem={setNewItem} handleSubmit={handleSubmit} />
       <SearchItem search={search} searchItem={searchItem} handleSubmit={handleSubmit} />
-      <Content items={items.filter(item => ((item.name).toLowerCase()).includes(search.toLowerCase()))} handleCheckbox={handleCheckbox} handleDelete={handleDelete} />
+      <main>
+        {isLoading && <p>Loading Items...</p>}
+        {fetchError && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
+        {!fetchError && !isLoading && <Content
+          items={items.filter(item => ((item.name).toLowerCase()).includes(search.toLowerCase()))}
+          handleCheck={handleCheckbox}
+          handleDelete={handleDelete}
+        />
+        }
+      </main>
       <Footer length={items.length}  />
 
     </div>

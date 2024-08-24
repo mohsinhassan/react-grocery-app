@@ -3,7 +3,7 @@ import ItemList from './ItemList'
 const Content = ( {items , handleCheckbox , handleDelete } ) => {
     
 return (
-    <main className='content'>
+    <>
         {items.length ? (
             <ItemList items={items} handleCheckbox={handleCheckbox} handleDelete={handleDelete} />
  
@@ -12,7 +12,7 @@ return (
             )
         }
        
-    </main>
+    </> 
 )
 }
 
