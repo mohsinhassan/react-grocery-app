@@ -41,7 +41,6 @@ function App() {
     setTimeout(() => fetchItems(), 2000);
   }, [])
   const handleCheckbox = async (id) => {
-    console.log('handleCheckbox', items);
     const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
     setItems(listItems);
     const myItem = items.filter((item) => item.id === id);
