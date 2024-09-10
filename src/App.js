@@ -6,7 +6,7 @@ import AddItem from './AddItem';
 import SearchItem from './SearchItem';
 import Footer from './Footer';
 import { useState , useEffect} from 'react';
-
+import ApiRequest from './ApiRequest';
 
 /* const handleNameChange = () => {
   const names = ['Mohsin', 'Hassan', 'Mirsab', 'Mahrosh'];
@@ -40,24 +40,57 @@ function App() {
     }
     setTimeout(() => fetchItems(), 2000);
   }, [])
-  const handleCheckbox = (id) => {
+  const handleCheckbox = async (id) => {
     console.log('handleCheckbox', items);
     const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
     setItems(listItems);
+    const myItem = items.filter((item) => item.id === id);
+    const updateOptions = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ checked: myItem[0].checked })
+    }
+
+    const reqUrl = `${ApiUrl}/${id}`;
+    const result = await ApiRequest(reqUrl, updateOptions);
+    if(result) setFetchError(result); 
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const listItems = items.filter((item) => item.id !== id );
+
+    const deleteOptions = {
+      method: 'DELETE'
+    }
+    const reqUrl = `${ApiUrl}/${id}`;
+    const result = await ApiRequest(reqUrl, deleteOptions);
+    if(result) setFetchError(result);
+
     setItems(listItems);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
       event.preventDefault();
-      const id = items.length ? items[items.length - 1].id + 1 : 1;
+      var id = items.length ? (parseInt(items[items.length - 1].id) + parseInt(1) ): 1;
       const name = newItem;
-      const item = { id, name };
+      console.log("id", id);
+      id = id.toString();
+      const item = { id , checked : false, name  };
       const listItems = [...items, item];
       setItems(listItems);
+
+      const postOptions = {
+        method : 
+        'POST',
+        headers : {
+          'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify(item)
+      }
+      const result = await ApiRequest(ApiUrl, postOptions); 
+      if(result) setFetchError(result);
       setNewItem(''); 
   }
 
